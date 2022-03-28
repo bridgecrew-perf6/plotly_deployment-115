@@ -76,6 +76,7 @@ function buildCharts(sample) {
     let otuIDs = result.otu_ids;
     let otuLabels = result.otu_labels;
     let sampleValues = result.sample_values;
+    //console.log(otuIDs);
 
     //create a variable that holds the washing frequency
     let washFreq = metaResult.wfreq;
@@ -86,22 +87,27 @@ function buildCharts(sample) {
     var yticks = otuIDs.sort((a, b) => a-b).reverse();
     var yticks = yticks.slice(0, 10);
 
+    console.log(yticks);
+
     // 8. Create the trace for the bar chart. 
+    //we know this works
     var barData = [{
       y: yticks,
       x: sampleValues,
       text: otuLabels,
-      name: (`OTU ${yticks}`),
+      name: otuIDs,
       type: "bar",
       orientation: "h"
     }
-      
     ];
-    // 9. Create the layout for the bar chart. 
+    
+    // // 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: "Top 10 Bacteria Cultures Found"
-     
-    };
+      title: "Top 10 Bacteria Cultures Found",
+      width: 500,
+     height: 400,
+
+     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout);
 
@@ -152,8 +158,8 @@ function buildCharts(sample) {
     
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = { 
-     width: 600,
-     height: 500,
+     width: 400,
+     height: 300,
      margin: {t: 0, b: 0}
     };
 
